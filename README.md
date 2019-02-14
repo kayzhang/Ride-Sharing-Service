@@ -1,4 +1,4 @@
-# Duke ECE 568 Homework 1
+# Django Web-App: Ride Sharing Service
 
 Please run the website with the following commond:
 
