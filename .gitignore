@@ -1,0 +1,13 @@
+# Mac
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+
+# Backup files
+*~
+
+# General
+log/
+*.log
