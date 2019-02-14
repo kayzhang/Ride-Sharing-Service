@@ -1,0 +1,14 @@
+{% extends 'ride/base.html' %}
+
+{% block content %}
+<h1>Please Choose Your Role:</h1>
+<div>
+    <button onclick="window.location.href='{% url 'ride:owner-home' %}'">Owner</button> <br><br>
+    <button onclick="window.location.href='{% url 'ride:sharer-home' %}'">Sharer</button> <br><br>
+    {% if user.profile.isDriver %}
+    <button onclick="window.location.href='{% url 'ride:driver-home' %}'">Driver</button> <br><br>
+    {% else %}
+    <button onclick="window.location.href='{% url 'profile' %}'">Register as a driver</button> <br><br>
+    {% endif %}
+</div>
+{% endblock content %}

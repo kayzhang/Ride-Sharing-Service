@@ -1,0 +1,9 @@
+{% extends 'ride/base.html' %}
+
+{% block content %}
+<h1>Which Action Do You Want?</h1>
+<div>
+    <button onclick="window.location.href='{% url 'ride:owner-request' %}'">Open a new request</button> <br><br>
+    <button onclick="window.location.href='{% url 'ride:owner-view' %}'">View request history</button> <br><br>
+</div>
+{% endblock content %}

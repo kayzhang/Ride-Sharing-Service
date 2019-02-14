@@ -1,0 +1,20 @@
+{% extends 'ride/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom md-4">Please update your ride</legend>
+                <p>You can only update the passenger number. Because other change other info will make your ride invalid.</p>
+
+                {{ form|crispy }}
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

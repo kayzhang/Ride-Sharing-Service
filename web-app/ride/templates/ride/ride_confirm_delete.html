@@ -1,0 +1,17 @@
+{% extends 'ride/base.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom md-4">Delete Ride</legend>
+                <h2>Are you sure you want to delete the ride?"{{ object.des }}"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit" href="{% url 'ride:owner-view'%}">Yes, Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'ride:owner-view'%}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

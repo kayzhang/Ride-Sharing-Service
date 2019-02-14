@@ -1,0 +1,41 @@
+Danger Log for HW1
+
+01/20: We find that if the user input doesn’t match the required format of our function, our app will not generate the right result. Especially the format of the time fields. Currently we assume all users will enter the right format.
+
+01/21: We use Django’ internal checking mechanism to solve the problem found yesterday. If the inputs have wrong format, the site will generate corresponding warnings which tells the user what’s the required format. Besides, we also add some hints about what to enter near the input box using “help_text” fields of varibales.
+
+How to do better? We can use some widgets, like date widget, to ensure the user input is properly formatted. Besides, it can increase usability greatly. Users don’t need to type and the possibility of entering wrong formatted input will decrease greatly.
+
+01/23: We find that if different users input different names for the same destination, our app will consider them as different destinations. For example, one sharer may type extra white spaces for the destination, in which case his ride won’t be matched with any other owners’ ride, since currently we match the destination according to whether the two fields are exactly the same. 
+
+How to improve? In the following versions, maybe we can add some more intelligent matching strategies.
+
+01/24: We find that even no user logs in, ride request or other operations are still allowed. To solve this problem, we add user check mechanism. Only after logging in, these operations are allowed.
+
+Inspired from such idea, we also make the rule that for a specified ride, owner can only edit his part, and sharer can only edit his part. 
+
+01/25: Ride status should be taken into consideration.
+
+One user may have different roles, owner, sharer or driver. Which rides they can view or edit should be based on users’ roles and the ride status. 
+
+For example, owner can edit or cancel a ride before the ride is confirmed by a driver. If a sharer joins, the owner can also view the sharer’s information but he can’t edit it. Sharer can also view the ride information and edit his part or cancel before the ride is confirmed. Driver can only select from rides that haven’t been confirmed. All the user can not see rides which are completed. 
+
+At first, we didn’t make it clear about the roles and ride status. Owner can still edit the ride even it has been confirmed by the driver. To solve the problem, we summarized all the situations and disabled the hyperlinks if the specified role can’t do such operation.
+
+01/27: How to deal with completed rides?
+
+After several tests we realize increasing number of rides will be created and they are all stored in the database. There will be one day the database is filled with history data. How to deal with the history data? Since none of the roles can view or edit completed rides, these records should be removed from database in a regular frequency. How long these records should be kept is related to the storage capacity and how important we define these records are.
+
+01/30: We find that if different drivers try to confirm the same open ride at the same time point, it will result in data race. That is to say, one ride may be selected and assigned to the same driver, which is of course impossible. 
+
+Till now, we don’t consider about concurrency. If the product will be put into market, this should be attached great importance.
+
+02/01: We find that if the sharer has a large amount of passengers. It will make this ride only available to a small number of drivers, thus harming the owner’s interest.
+
+To solve this, we add another field “maximum accepted sharer number” when the owner makes a request. So, the owner will have the ability to control the maximum passengers in this trip.
+
+02/03: We realize that our system only allow one share per ride. Actually, several sharer can join the same ride. If we will implement such function in the future, we can add another status variable.
+
+02/04: We found that we assume each user have three roles at the beginning. However, only after registering, a user can become a driver. Otherwise, a user can select a ride without having a car. It is ridiculous. We corrected such logical mistake.
+
+02/05: We found that once a user registers as a driver, he will always have such role in our system. However, not being a driver should be allowed. We update our system after find it. I t makes our system more reasonable.

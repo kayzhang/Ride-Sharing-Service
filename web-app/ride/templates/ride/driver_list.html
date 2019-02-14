@@ -1,0 +1,48 @@
+{% extends 'ride/base.html' %}
+{% block content %}
+<table class="table table-striped table-bordered">
+  <tr>
+      <th>Status</th>
+      <th>Confirm</th> 
+      <th>Owner Name</th>
+      <th>Destination</th>
+      <th>Starting Time</th>
+      <th>Arriving Time</th>
+      <th>Owner's Passenger Number</th>
+      <th>Share or not</th>
+      <th>Max Share Number</th>
+      <th>Sharer Name</th>
+      <th>Sharer's Passenger Number</th>
+      <th>Driver Name</th>
+      <th>Vehicle Type</th>
+      <th>License Plate Number</th>
+      <th>Maximum Passenger Capacity</th>
+  </tr>
+  {% for ride in object_list %}
+  <tr>
+    {% if ride.status == 0 %}
+          <th>Open</th>
+      {% elif ride.status == 1%}
+          <th>Confirmed</th>
+      {% else %}
+          <th>Complete</th>
+      {% endif %}
+      <th><a href="{% url 'ride:driver-confirm' ride.id %}">Confirm</a></th>
+      <th>{{ ride.owner.username }}</th>
+      <th>{{ ride.des }}</th>
+      <th>{{ ride.start_date|date:"F d, Y" }}</th>
+      <th>{{ ride.arrive_date|date:"F d, Y" }}</th>
+      <th>{{ ride.pas_num }}</th>
+      <th>{{ ride.share_valid }}</th>
+      <th>{{ ride.share_max_num }}</th>
+      <th>{{ ride.share_name }}</th>
+      <th>{{ ride.share_number }}</th>
+      <th>{{ ride.driver_name }}</th>
+      <th>{{ ride.vehicle_type }}</th>              
+      <th>{{ ride.license_plate_number }}</th>      
+      <th>{{ ride.max_pas_num }}</th>
+    </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}
